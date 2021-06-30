@@ -154,10 +154,11 @@ public class CustomerQuery {
                 //  获取对应列的数据
                 Object columnValue = resultSet.getObject(i + 1);
                 //  获取列名
-                String columnName = metaData.getColumnName(i + 1);
+//                String columnName = metaData.getColumnName(i + 1);
+                String columnLabel = metaData.getColumnLabel(i + 1);
 
                 //  通过反射给对象的对应属性赋值
-                Field declaredField = Customer.class.getDeclaredField(columnName);
+                Field declaredField = Customer.class.getDeclaredField(columnLabel);
                 declaredField.setAccessible(true);
                 declaredField.set(cust,columnValue);
             }
