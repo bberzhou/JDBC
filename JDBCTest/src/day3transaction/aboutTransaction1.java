@@ -64,12 +64,13 @@ public class aboutTransaction1 {
         //  int TRANSACTION_READ_UNCOMMITTED = 1;
         //  int TRANSACTION_READ_COMMITTED   = 2;
         //  int TRANSACTION_REPEATABLE_READ  = 4;
-        //
-        System.out.println(connection.getTransactionIsolation());
-
+        //  int TRANSACTION_SERIALIZABLE     = 8;
         //  关闭自动提交
         connection.setAutoCommit(false);
-
+        System.out.println(connection.getTransactionIsolation());
+        //  设置当前数据库连接的隔离级别
+        connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+        System.out.println(connection.getTransactionIsolation());
         String sql = "select user,password,balance from user_table where user = ?";
         User user = getInstance(connection, User.class, sql, "CC");
         System.out.println(user);
@@ -78,6 +79,9 @@ public class aboutTransaction1 {
     @Test
     public void testTransactionUpdate() throws SQLException, IOException, ClassNotFoundException, InterruptedException {
         Connection connection = JDBCUtils.getConnection();
+        //  取消自动提交
+        connection.setAutoCommit(false);
+
         String sql = "update user_table set balance = ? where user = ?";
         update1(connection,sql,5000,"CC");
         Thread.sleep(15000);
