@@ -1,6 +1,9 @@
-package day4DAO;
+package day5DAO2;
 
 import day4DAO.Bean.Customer;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +14,25 @@ import java.util.List;
  * @date: 7/2/2021
  * Create By Intellij IDEA
  */
-public class CustomersDAOImpl extends BaseDAO implements CustomersDAO {
+//  CustomersDAOImpl在实现的时候就指明要操作的对象 是Customer类
+public class CustomersDAOImpl extends BaseDAO<Customer> implements CustomersDAO {
+    //  这里就需要获取当前类CustomersDAOImpl 的父类BaseDAO的泛型 <Customer>
+    //  让这个泛型去给父类BaseDAO 里面的 tClass 做一个实例化
+
+    //  就可以在子类里面给父类的 tClass赋值
+
+//    {
+//        //  先获取当前类的带泛型的父类，注意这里的this ，并不是指的BaseDAO,应该是当前子类在实例化对象时，会自动执行父类里面的静态代码块
+        //  这里写到BaseDAO里面，因为this 可以使每个继承的子类在实例化对象的时候，可以自动的指向当前的子类，不用到每个子类里面都写这一段代码
+//        Type genericSuperclass = this.getClass().getGenericSuperclass();
+//        //  做一个强转
+//        ParameterizedType parameterizedType = (ParameterizedType) genericSuperclass;
+//        //  获取了父类的泛型参数  ,这里返回的一个参数数组
+//        Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
+//        tClass = (Class<T>) actualTypeArguments[0];//   泛型的第一个参数，就是当前子类中泛型的具体参数<T>里面的
+//    }
+
+
     //  插入数到Customers
     @Override
     public void insert(Connection connection, Customer customer) {
@@ -44,14 +65,14 @@ public class CustomersDAOImpl extends BaseDAO implements CustomersDAO {
         String sql = "select id, name, email, birth from customers where id =?";
 //        Customer cust = getInstance(connection, Customer.class, sql, id);
 //        return cust;
-        return getInstance(connection,Customer.class,sql,id);
+        return getInstance(connection,sql,id);
     }
 
     //  查询所有的costumers
     @Override
     public List<Customer> getCustomersAll(Connection connection) {
         String sql = "select id, name, email, birth from customers";
-        List<Customer> costumersList = getForList(connection, Customer.class, sql);
+        List<Customer> costumersList = getForList(connection, sql);
         return costumersList;
     }
 
