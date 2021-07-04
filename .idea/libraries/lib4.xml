@@ -4,7 +4,9 @@
       <root url="file://$PROJECT_DIR$/JDBCTest/lib" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/JDBCTest/lib/commons-dbcp2-2.1.1.jar!/" />
+    </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/JDBCTest/lib" recursive="false" />
   </library>
 </component>

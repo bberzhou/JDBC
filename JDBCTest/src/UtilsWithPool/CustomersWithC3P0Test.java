@@ -18,7 +18,7 @@ import java.util.List;
  * @date: 7/3/2021
  * Create By Intellij IDEA
  */
-public class CustomersWithPoolTest {
+public class CustomersWithC3P0Test {
     CustomersDAO customersDAO = new CustomersDAOImpl();
 
     @Test

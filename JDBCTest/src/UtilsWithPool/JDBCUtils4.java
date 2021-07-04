@@ -1,34 +1,44 @@
 package UtilsWithPool;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.alibaba.druid.pool.DruidDataSourceFactory;
 
+import javax.sql.DataSource;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
- * @description: 使用c3p0数据库连接池的JDBCUtils
+ * @description:
  * @author: bberzhou@gmail.com
- * @date: 7/3/2021
+ * @date: 7/4/2021
  * Create By Intellij IDEA
  */
-public class JDBCUtils2 {
-    //  将创建连接池得操作拿出来，这样不用每次调用getConnection得时候都去创建一个
-    //  数据库连接池只需要提供一个就可以了。这里就创建一个静态的常量来处理连接池
-   private static final ComboPooledDataSource cpds = new ComboPooledDataSource("helloc3p0");
+public class JDBCUtils4 {
 
-    public static Connection getConnection(){
-        //  导入的自定义的配置名： helloc3p0 在c3p0-config.xml里面的 <named-config name="helloc3p0">
-        //  使用c3p0得数据库连接技术；
-        Connection connection = null;
+    private static DataSource dataSource;
+    //  使用静态代码块的方式，让类加载的时候就为dataSource对象赋值，并创建一个数据库连接池
+    static {
         try {
-            connection = cpds.getConnection();
+            Properties properties = new Properties();
+            //  加载配置文件
+            InputStream resourceAsStream = ClassLoader.getSystemClassLoader().getResourceAsStream("druid.properties");
+            properties.load(resourceAsStream);
+            //  给 dataSource 赋值
+            dataSource = DruidDataSourceFactory.createDataSource(properties);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static Connection getConnection() throws SQLException {
+        Connection connection = dataSource.getConnection();
         return connection;
     }
+
+    //  关闭连接
     public static void closeResource(Connection conn, PreparedStatement ps, ResultSet resultSet) {
         try {
             if (ps != null) {

@@ -1,8 +1,6 @@
 package day5DAO2;
 
 import Utils.JDBCUtils;
-import org.junit.runners.Parameterized;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
