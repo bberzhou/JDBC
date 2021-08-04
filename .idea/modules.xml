@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/JDBCTest/JDBCTest.iml" filepath="$PROJECT_DIR$/JDBCTest/JDBCTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/02_JDBCTest/02_JDBCTest.iml" filepath="$PROJECT_DIR$/02_JDBCTest/02_JDBCTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03_jQuery/03_jQuery.iml" filepath="$PROJECT_DIR$/03_jQuery/03_jQuery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/05_book_static/05_book_static.iml" filepath="$PROJECT_DIR$/05_book_static/05_book_static.iml" />
+      <module fileurl="file://$PROJECT_DIR$/06_XML/06_XML.iml" filepath="$PROJECT_DIR$/06_XML/06_XML.iml" />
+      <module fileurl="file://$PROJECT_DIR$/07_web/07_web.iml" filepath="$PROJECT_DIR$/07_web/07_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/08_servlet/08_servlet.iml" filepath="$PROJECT_DIR$/08_servlet/08_servlet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/09_jsp/09_jsp.iml" filepath="$PROJECT_DIR$/09_jsp/09_jsp.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaWeb.iml" filepath="$PROJECT_DIR$/JavaWeb.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MyBatis/MyBatis.iml" filepath="$PROJECT_DIR$/MyBatis/MyBatis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/book/book.iml" filepath="$PROJECT_DIR$/book/book.iml" />
     </modules>
   </component>
 </project>

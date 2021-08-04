@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+
+	//核心函数的4个作用
+    $(function () {
+        // alert("页面加载完成之后，自动调用");
+
+        $("    <div>" +
+            "        <span>div-span1</span>" +
+            "        <span>div-span2</span>" +
+            "    </div>").appendTo("body");
+
+        // alert($("button").length);
+
+        var btnObj = document.getElementById("btn01");
+        // alert(btnObj);
+        // alert( $(btnObj) );
+
+        // alert( $("<h1></h1>") );
+        alert($("button"));
+
+    });
+	//传入参数为[函数]时：在文档加载完成后执行这个函数，会创建HTML标签对象
+
+	//传入参数为[HTML字符串]时：根据这个字符串创建元素节点对象
+            // $("#id") ,$(".class") $("标签名")
+	//传入参数为[选择器字符串]时：根据这个字符串查找元素节点对象
+	//传入参数为[DOM对象]时：将DOM对象包装为jQuery对象返回
+    /**
+     *  jQuery对象和 dom 对象区分
+     *  DOM对象：
+     *      通过getElementById()，查询出来的标签对象是DOM对象
+     *      通过getElementByTagName()，查询出来的标签对象是DOM对象
+     *      通过getElementByName()，查询出来的标签对象是DOM对象
+     *      通过createElement()方法创建的对象
+     *      DOM对象alert出来的效果是： [object HTML 标签名 Element]
+     *
+     *
+     *  jQuery对象
+     *      通过jQuery提供的API创建的对象，是jQuery对象
+     *      通过jQuery包装的DOM对象，
+     *      通过jQuery提供的API查询到的对象
+     *
+     *      jQuery对象 alert 出来的效果是 [object Object]
+     *
+     *  jQuery对象的本质是什么？
+     *      jQuery对象是DOM对象的数组和 jQuery提供的一系列功能函数
+     *
+     *  DOM对象和jQuery对象互转
+     *      1、dom对象转换为jQuery对象
+     *          （1）先有DOM对象
+     *          （２）＄（DOM对象）就可以转换成为jQuery对象
+     *              var $obj = $(dom对象)
+     *
+     *      2、jQuery对象转换为dom对象
+     *          （1）先有jQuery对象
+     *          （2）jQuery对象[下标]取出相应的DOM对象
+     *              var dom = $obj[下标]
+     *
+     *
+     *
+     */
+</script>
+</head>
+<body>
+    <button id="btn01">按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+</body>
+</html>

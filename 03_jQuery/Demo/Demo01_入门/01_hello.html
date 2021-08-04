@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../script/jquery-3.6.0.js"></script>
+    <script >
+
+        // window.onload = function () {
+        //     let elementById = document.getElementById("btnId");
+        //     // alert(elementById);
+        //     elementById.onclick = function () {
+        //         alert("JS原生的单击事件");
+        //     }
+        // }
+        // alert($);
+        $(function () { //  表示页面加载完成之后，相当于 window.onload =function(){}
+            let $btnId = $("#btnId");   //  jQuery选择器，
+            //  点击事件，绑定响应函数
+            $btnId.click(function () {
+                alert("jQuery的单击事件");
+            });
+
+        //    $ 是jQuery的核心函数
+
+        })
+    </script>
+</head>
+<body>
+    <button id="btnId">点击hello</button>
+</body>
+</html>

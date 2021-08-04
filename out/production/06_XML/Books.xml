@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<books>
+    <!--book 表示应该图书信息，sn属性表示图书序列号-->
+    <book sn="SN1321222">
+        <!--name标签表示书名-->
+        <name>时间简史</name>
+        <!--author表示作者-->
+        <author>霍金</author>
+        <!--price 表示图书价格-->
+        <price>75</price>
+    </book>
+    <!--book 表示应该图书信息，sn属性表示图书序列号-->
+    <book sn="SN132">
+        <!--name标签表示书名-->
+        <name>Java从入门到放弃</name>
+        <!--author表示作者-->
+        <author> 沙老师</author>
+        <!--price 表示图书价格-->
+        <price>99</price>
+    </book>
+</books>

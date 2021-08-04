@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    XML是扩展的标记行语言。
+
+    XML的主要作用有：
+        1、用来保存数据，这些数据具有自我描述性
+        2、它还可以作为项目或者模块的配置文件，比如（Mybatis等等）
+        3、它还可以作为网络传输数据的格式（现在以JSON格式数据为主）
+    可以使用DOM解析技术来解析XML文件：SAX(Simple API for XML)
+    第三方的解析工具：
+        jdom 在dom基础上进行了封装；
+        dom4j又对jdom进行了封装；
+        pull主要使用在Android手机上开发，
+-->
+<books>
+        <!--book 表示应该图书信息，sn属性表示图书序列号-->
+    <book sn="SN132">
+        <!--name标签表示书名-->
+        <name>时间简史</name>
+        <!--author表示作者-->
+        <author>霍金</author>
+        <!--price 表示图书价格-->
+        <price>75</price>
+    </book>
+    <!--book 表示应该图书信息，sn属性表示图书序列号-->
+    <book sn="SN132">
+        <!--name标签表示书名-->
+        <name>Java从入门到放弃</name>
+        <!--author表示作者-->
+        <author> 沙老师</author>
+        <!--price 表示图书价格-->
+        <price>99</price>
+    </book>
+</books>
