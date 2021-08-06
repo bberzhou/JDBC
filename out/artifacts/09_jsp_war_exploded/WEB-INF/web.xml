@@ -11,4 +11,18 @@
         <servlet-name>PrintHtml</servlet-name>
         <url-pattern>/printHtml</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SearchStudentServlet</servlet-name>
+        <servlet-class>com.bberzhou.servlet.SearchStudentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchStudentServlet</servlet-name>
+        <url-pattern>/searchStudentServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--配置监听器-->
+    <listener>
+        <listener-class>com.bberzhou.listener.MyServletContextListener</listener-class>
+    </listener>
 </web-app>

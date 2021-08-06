@@ -17,6 +17,8 @@ public class Response1 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Response1 的请求响应");
+
+
         //  请求重定向的方式一：设置响应状态码和 请求头
 
         //  设置响应状态码302，表示重定向，（）
