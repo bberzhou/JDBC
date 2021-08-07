@@ -30,9 +30,6 @@
   request.getMethod()     获取请求方法(GET 或者POST)
   request.getRemoteHost() 获取客户端的 ip地址
   session.getId   获取会话（session）的id
-
-
-
 --%>
 
 <%--
