@@ -73,4 +73,20 @@ public class WebUtils {
         //  参数注入完成之后，将JavaBean返回
         return bean;
     }
+
+
+    /**
+     *  此静态方法主要是负责将字符串转换成为int类型的数据
+     * @param strInt    要转换的字符串
+     * @param defaultValue  默认值
+     * @return
+     */
+    public static int parseInt(String strInt,int defaultValue){
+        try {
+            return Integer.parseInt(strInt);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return defaultValue;
+    }
 }

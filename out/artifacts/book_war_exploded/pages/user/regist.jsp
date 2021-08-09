@@ -108,7 +108,7 @@
                     <span class="errorMsg">
 <%--                        <%=request.getAttribute("username")==null?"请输入用户名":request.getAttribute("msg")%>--%>
 <%--                        使用EL 表达式进行替换 --%>
-                        ${requestScope.msg}
+                        ${empty requestScope.msg ? "请输入用户名和密码！":requestScope.msg}
                     </span>
                 </div>
                 <div class="form">

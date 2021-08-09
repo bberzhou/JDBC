@@ -45,7 +45,7 @@ public class UploadServlet extends HttpServlet {
             ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
 
             try {
-                //  4、解析上传的数据，得到一个表单项集合FileItem
+                //  4、解析上传的数据，得到一个表单项集合FileItems
                 List<FileItem> fileItems = servletFileUpload.parseRequest(req);
                 //  循环判断每一个表单项，是普通类型，还是上传的文件
                 for (FileItem fileItem : fileItems) {

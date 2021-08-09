@@ -46,7 +46,7 @@ public abstract class BaseDao {
     }
 
     /**
-     *  查询返回一个JavaBean的sql语句
+     *  查询返回一个JavaBean的sql语句，注意这是一个泛型方法！
      * @param t 返回的对象类型
      * @param sql 要执行的sql语句
      * @param args  sql语句对应的参数

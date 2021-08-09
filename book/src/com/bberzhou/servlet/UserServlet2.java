@@ -4,17 +4,13 @@ import com.bberzhou.pojo.User;
 import com.bberzhou.service.UserService;
 import com.bberzhou.service.impl.UserServiceImpl;
 import com.bberzhou.utils.WebUtils;
-import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Map;
+
 
 /**
  * @description:
@@ -26,6 +22,8 @@ public class UserServlet2 extends BaseServlet {
     private final UserService userService = new UserServiceImpl();
 
     /**
+     * 此方法做登录时调用
+     *
      * @param req
      * @param resp
      * @throws ServletException
@@ -56,6 +54,8 @@ public class UserServlet2 extends BaseServlet {
     }
 
     /**
+     * 此方法做注册时调用，
+     *
      * @param req
      * @param resp
      * @throws ServletException
@@ -105,7 +105,7 @@ public class UserServlet2 extends BaseServlet {
             //  3、检查用户名是否可用
             if (userService.existUsername(username)) {
                 //  userService.existUsername(username) 返回true 表示已经存在不可用
-                System.out.println("用户名[" + username + "]已存在，不可用！");
+                // System.out.println("用户名[" + username + "]已存在，不可用！");
                 req.setAttribute("msg", "用户名不可用！");
                 req.setAttribute("username", username);
                 req.setAttribute("password", password);

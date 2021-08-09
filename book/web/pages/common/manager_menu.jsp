@@ -12,9 +12,14 @@
 </head>
 <body>
 <div>
-    <a href="book_manager.jsp">图书管理</a>
-    <a href="order_manager.jsp">订单管理</a>
-    <a href="../../index.jsp">返回商城</a>
+    <%--
+        这里指定成为  manager/bookServlet?action=list
+        表示点击图书管理的时候就调用  bookServlet ，然后根据传入的参数 action=list 利用反射来调用对应的方法，
+        list就是 BookServlet 类里面的 list() 方法
+     --%>
+    <a href="manager/bookServlet?action=list">图书管理</a>
+    <a href="pages/manager/order_manager.jsp">订单管理</a>
+    <a href="index.jsp">返回商城</a>
 </div>
 </body>
 </html>

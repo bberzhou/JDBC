@@ -25,10 +25,11 @@ public class DownloadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //  1、获取要下载的文件名
         String downloadFileName  = "2.png";
-        //  2、读取要下载的文件内容（通过ServletContext对象可以读取）
+        //  2、读取要下载的文件内容（通过ServletContext对象可以读取，通过流的方式）
         ServletContext servletContext = getServletContext();
         InputStream resourceAsStream = servletContext.getResourceAsStream("/picFile/"+downloadFileName);
         // byte[] buffer = new byte[1024];
+
         //  获取响应的输出流
         ServletOutputStream outputStream = resp.getOutputStream();
         /**

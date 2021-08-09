@@ -1,7 +1,7 @@
 package com.bberzhou.pojo;
 
 /**
- * @description:
+ * @description: 用户类
  * @author: bberzhou@gmail.com
  * @date: 8/3/2021
  * Create By Intellij IDEA

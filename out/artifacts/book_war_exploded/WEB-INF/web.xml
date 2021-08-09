@@ -38,4 +38,14 @@
         <url-pattern>/userServlet2</url-pattern>
     </servlet-mapping>
 
+<!--    图书管理的Servlet-->
+    <servlet>
+        <servlet-name>BookServlet</servlet-name>
+        <servlet-class>com.bberzhou.servlet.BookServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookServlet</servlet-name>
+        <url-pattern>/manager/bookServlet</url-pattern>
+    </servlet-mapping>
+
 </web-app>

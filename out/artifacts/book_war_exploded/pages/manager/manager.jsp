@@ -19,7 +19,7 @@
 <body>
 
 <div id="header">
-    <img class="logo_img" alt="" src="../../static/img/logo.gif">
+    <img class="logo_img" alt="" src="static/img/logo.gif">
     <span class="wel_word">后台管理系统</span>
     <%--<div>--%>
     <%--    <a href="book_manager.jsp">图书管理</a>--%>
