@@ -1,6 +1,7 @@
 package com.bberzhou.servlet;
 
 import com.bberzhou.pojo.Book;
+import com.bberzhou.pojo.Page;
 import com.bberzhou.service.BookService;
 import com.bberzhou.service.impl.BookServiceImpl;
 import com.bberzhou.utils.WebUtils;
@@ -55,7 +56,16 @@ public class BookServlet extends BaseServlet{
         resp.setStatus(302);
         //  注意：这里添加成功之后，跳转应该还需要将添加的显示到页面中，所以就需要再调用一次 list
         //  并且请求转发是一次请求，而重定向是两次请求, 获取工程名req.getContextPath()
-        resp.setHeader("Location",req.getContextPath()+"/manager/bookServlet?action=list");
+
+        // resp.setHeader("Location",req.getContextPath()+"/manager/bookServlet?action=list");
+
+        //  采用分页之后，点击添加之后应该 action=page，这样才能正常显示出来，注意这里由于分页之后，当添加数据的时候，要正常回显到最后一条数据
+
+        //  获取当前页，从前端获取当前页，如果没有，则默认值为0 因为下面要进行 +1 操作
+        int pageNo = WebUtils.parseInt(req.getParameter("pageNo"),0);
+        pageNo += 1;
+        System.out.println(req.getParameter("pageNo"));
+        resp.setHeader("Location",req.getContextPath()+"/manager/bookServlet?action=page&pageNo="+pageNo);
 
     }
 
@@ -79,12 +89,17 @@ public class BookServlet extends BaseServlet{
 
         // list(req,resp);
 
+        //  重定向方式一
         //  使用重定向的方式，到action=list下面
-        resp.setStatus(302);
-        //  这样地址就重定向到 ：http://localhost:8080/book/manager/bookServlet?action=list
-        resp.setHeader("Location",req.getContextPath()+"/manager/bookServlet?action=list");
+        // resp.setStatus(302);
+        // //  这样地址就重定向到 ：http://localhost:8080/book/manager/bookServlet?action=list
+        // resp.setHeader("Location",req.getContextPath()+"/manager/bookServlet?action=list");
 
+        //  重定向方式二
         // resp.sendRedirect(req.getContextPath()+"/manager/bookServlet?action=list");
+
+        //  当使用分页之后，跳转的就是 action=page了，并且删除之后要显示到最后一页的数据,
+        resp.sendRedirect(req.getContextPath()+"/manager/bookServlet?action=page&pageNo="+req.getParameter("pageNo"));
     }
 
     /**
@@ -111,7 +126,10 @@ public class BookServlet extends BaseServlet{
 
         //  这里使用重定向应该好一些，如果使用请求转发， F5 会重新执行一次
         System.out.println("更新了，现在重定向");
-        resp.sendRedirect(req.getContextPath()+"/manager/bookServlet?action=list");
+        //  这是未使用分页的时候，action=list，直接查询所有的数据，
+        // resp.sendRedirect(req.getContextPath()+"/manager/bookServlet?action=list");
+        //  使用分页之后，如果修改了，要使用action= page 重新查询一次
+        resp.sendRedirect(req.getContextPath()+"/manager/bookServlet?action=page&pageNo="+req.getParameter("pageNo"));
     }
 
     /**
@@ -162,6 +180,36 @@ public class BookServlet extends BaseServlet{
         req.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(req,resp);
 
 
+    }
+
+    /**
+     *  处理分页功能
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void page(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //  1、获取请求的参数 pageNo 和 pageSize，注意这里获取参数的时候，当第一次请求的时候，
+        //      用户没有传递时候应该有一个默认值，pageNo = 1,pageSize  = PAGE_SIZE
+        // String pageNoStr = req.getParameter("pageNo");
+        // int pageNo = Integer.parseInt(pageNoStr);
+        // String pageSizeStr = req.getParameter("pageSize");
+        // int pageSize = Integer.parseInt(pageSizeStr);
+
+        int pageNo = WebUtils.parseInt(req.getParameter("pageNo"),1);
+        int pageSize = WebUtils.parseInt(req.getParameter("pageSize"), Page.PAGE_SIZE);
+        //  2、调用BookService.page(pageNo,pageSize)，返回一个Page对象
+        Page<Book> page = bookService.page(pageNo, pageSize);
+
+        //  设置后台的请求地址
+        page.setUrl("manager/bookServlet?action=page");
+
+        //  3、将返回的Page对象保存到request 域中进行回显，
+        req.setAttribute("page",page);
+        //  4、请求转发到pages/manager/book_manager.jsp 页面
+        System.out.println("查询完了，跳转");
+        req.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(req,resp);
     }
 
     @Override

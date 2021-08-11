@@ -72,4 +72,22 @@
         <servlet-name>Response2</servlet-name>
         <url-pattern>/response2</url-pattern>
     </servlet-mapping>
+<!--    处理重复提交的Servlet-->
+    <servlet>
+        <servlet-name>ResubmitServlet</servlet-name>
+        <servlet-class>com.bberzhou.ResubmitServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResubmitServlet</servlet-name>
+        <url-pattern>/resubmitServlet</url-pattern>
+    </servlet-mapping>
+<!--    配置验证码的Servlet-->
+    <servlet>
+        <servlet-name>KaptchaServlet</servlet-name>
+        <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>KaptchaServlet</servlet-name>
+        <url-pattern>/Kaptcha.jpg</url-pattern>
+    </servlet-mapping>
 </web-app>

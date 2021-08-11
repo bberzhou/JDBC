@@ -23,6 +23,7 @@ public abstract class BaseDao {
     private QueryRunner queryRunner = new QueryRunner();
 
 
+
     /**
      * update() 方法用来执行： insert/ update/ Delete相关的操作
      * @param sql   要执行的sql 语句

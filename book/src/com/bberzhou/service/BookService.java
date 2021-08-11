@@ -1,6 +1,7 @@
 package com.bberzhou.service;
 
 import com.bberzhou.pojo.Book;
+import com.bberzhou.pojo.Page;
 
 import java.util.List;
 
@@ -40,8 +41,9 @@ public interface BookService {
      *  查询所有图书的
      * @return 返回一个List集合
      */
-
     public List<Book> queryBooks();
 
+    public Page<Book> page(Integer pageNo, Integer pageSize);
 
+    public Page<Book> pageByPrice(int pageNo, int pageSize, int min, int max);
 }

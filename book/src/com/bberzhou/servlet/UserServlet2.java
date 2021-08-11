@@ -41,6 +41,12 @@ public class UserServlet2 extends BaseServlet {
         if (user != null) {
             //  不为空，证明有数据，可以登录成功，跳转到登录成功的页面
             System.out.println("账号：" + username + "，" + "密码：" + password + " 登录成功！");
+
+            // 同时登录成功的时候，还需要将用户的信息保存到 session域中，（request域无法满足要求）
+
+            req.getSession().setAttribute("user",user);
+
+            //  请求转发到登录成功的页面上去。
             req.getRequestDispatcher("/pages/user/login_success.jsp").forward(req, resp);
         } else {
             //  登录失败的话，需要把错误信息和回显的表单项信息，保存到request域中
@@ -133,5 +139,27 @@ public class UserServlet2 extends BaseServlet {
         }
     }
 
+    /**
+     *  用户注销功能。1、销毁session或者Session中登录的用户信息；2、重定向到首页或者登录页即可）
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //  1、销毁Session中用户登录的信息（或者直接销毁session）
+
+        //  销毁Session
+        req.getSession().invalidate();
+
+        //  2、重定向到首页（或者登录页面）
+
+        //  到首页，就是直接到当前这个工程下面即可。
+        // resp.sendRedirect(req.getContextPath());
+
+        //  到登录页
+        resp.sendRedirect(req.getContextPath()+"/pages/user/login.jsp");
+        System.out.println("注销，到登录页");
+    }
 
 }

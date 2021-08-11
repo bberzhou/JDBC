@@ -17,6 +17,9 @@
 --%>
 <%
     String appPath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
+
+    //  将appPath设置到request域中，提供给其他页面获取
+    pageContext.setAttribute("appPatth",appPath);
 %>
 <base href="<%=appPath%>">
 <%--<%=basePath%>--%>

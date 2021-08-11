@@ -48,8 +48,7 @@
         版本三， 也可以直接将参数写到 manager/bookServlet?action 后面
 
     --%>
-    <form action="manager/bookServlet?action=${param.method}&id=${requestScope.book.id}" method="post">
-
+    <form action="manager/bookServlet?action=${param.method}&id=${requestScope.book.id}&pageNo=${param.pageNo}" method="post">
 
         <%--这里也可以使用 使用隐藏域的方式 来获取 action 的值--%>
         <%--  版本一 --%>
@@ -67,6 +66,7 @@
         <%--&lt;%&ndash;  获取method参数，赋值给value ，这个method是从book_manager.jsp中的a 标签传过来的 &ndash;%&gt;--%>
         <%--<input type="hidden"  name="action" value="${param.method}">--%>
         <%--    <input type="hidden" name="id" value="${requestScope.book.id}">--%>
+        <%--    <input type="hidden" name="id" value="${requestScope.page.pageNo}">--%>
         <table>
             <tr>
                 <td>名称</td>

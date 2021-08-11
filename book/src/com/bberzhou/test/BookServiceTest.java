@@ -1,6 +1,7 @@
 package com.bberzhou.test;
 
 import com.bberzhou.pojo.Book;
+import com.bberzhou.pojo.Page;
 import com.bberzhou.service.BookService;
 import com.bberzhou.service.impl.BookServiceImpl;
 import org.junit.Test;
@@ -39,5 +40,10 @@ public class BookServiceTest {
         for (Book book:books){
             System.out.println(book);
         }
+    }
+    @Test
+    public void page(){
+        Page<Book> page = bookService.page(1, 5);
+        System.out.println(page);
     }
 }

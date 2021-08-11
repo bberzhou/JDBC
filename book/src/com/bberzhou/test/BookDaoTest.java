@@ -6,6 +6,7 @@ import com.bberzhou.pojo.Book;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -43,6 +44,31 @@ public class BookDaoTest {
     public void queryBook() {
         List<Book> books = bookDao.queryBooks();
         for (Book book:books){
+            System.out.println(book);
+        }
+    }
+    @Test
+    public void queryForPageTotalCount(){
+        int pageTotalCount = bookDao.queryForPageTotalCount();
+        System.out.println(pageTotalCount);
+    }
+    @Test
+    public void queryForItems(){
+        List<Book> bookList = bookDao.queryForItems(0, 4);
+        for (Book book :bookList){
+            System.out.println(book);
+        }
+    }
+
+    @Test
+    public void queryForPageSearchTotalCount() {
+        int i = bookDao.queryForPageSearchTotalCount(10,200);
+        System.out.println(i);
+    }
+    @Test
+    public void queryForSearchItems(){
+        List<Book> bookList = bookDao.queryForSearchItems(1, 20, 10, 200);
+        for (Book book :bookList){
             System.out.println(book);
         }
     }

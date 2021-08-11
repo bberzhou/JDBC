@@ -2,6 +2,7 @@ package com.bberzhou.dao.impl;
 
 import com.bberzhou.dao.BookDao;
 import com.bberzhou.pojo.Book;
+import com.bberzhou.pojo.Page;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -108,6 +109,10 @@ public class BookDaoImpl extends BaseDao implements BookDao {
         return -1;
     }
 
+    /**
+     * 查询所有的书籍数据
+     * @return  返回一个list集合的book
+     */
     @Override
     public List<Book> queryBooks() {
         String sql = "select `id`,`name`,`author`,`price`,`sales`,`stock`,`img_path` imgPath from t_book";
@@ -120,4 +125,82 @@ public class BookDaoImpl extends BaseDao implements BookDao {
         //  如果没查询到，直接返回Null
         return null;
     }
+
+    /**
+     *  用于查询数据库中总的数据条数，
+     * @return  返回数据库中总的数据条数
+     */
+    @Override
+    public int queryForPageTotalCount() {
+        String  sql = " select count(*) from t_book ";
+        try {
+            //  注意这里的返回值类型，不能直接这样转
+            // return (int) queryForSingleValue(sql);
+            Number count = (Number) queryForSingleValue(sql);
+            return count.intValue();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        //  表示没查到
+        return -1;
+    }
+
+    /**
+     *  用于分页查询的方法
+     * @param begin  分页查询的起始索引值
+     * @param pageSize  分页查询中的每页大小
+     * @return 返回一个list集合
+     */
+    @Override
+    public List<Book> queryForItems(int begin, Integer pageSize) {
+        //  注意这里不能直接写 * ，要设置别名
+        // String sql = "select * from t_book limit ?,?";
+        String sql = "select `id`,`name`,`author`,`price`,`sales`,`stock`,`img_path` imgPath from t_book limit ?,?";
+        try {
+            //  查询到之后直接返回 list集合
+            return queryForList(Book.class, sql, begin, pageSize);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     *  此方法用于 首页 价格区间的搜索查询返回总的记录条数，根据价格区间来查询
+     * @return
+     */
+    @Override
+    public int queryForPageSearchTotalCount(Integer min,Integer max) {
+        String sql = " select count(*) from t_book where price BETWEEN ? AND ?";
+        try {
+            Number count = (Number) queryForSingleValue(sql,min,max);
+            return count.intValue();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        //  如果没查询成功就返回 -1
+        return -1;
+    }
+
+    /**
+     *  查询当前页的数据 ,并按照查询出来的一个区间价格排序
+     * @param begin  起始索引值
+     * @param pageSize 每页的大小
+     * @param min 价格最大值
+     * @param max 价格最大值
+     * @return 返回一个 list集合
+     */
+    @Override
+    public List<Book> queryForSearchItems(int begin, int pageSize, int min, int max) {
+        String sql = "select `id`,`name`,`author`,`price`,`sales`,`stock`,`img_path` imgPath from t_book" +
+                " where price between ? and ? order by price limit ?,?";
+        try {
+            //  查询到之后直接返回 list集合
+            return queryForList(Book.class, sql, min,max,begin, pageSize);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

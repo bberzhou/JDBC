@@ -82,10 +82,8 @@ public class WebUtils {
      * @return
      */
     public static int parseInt(String strInt,int defaultValue){
-        try {
+        if (strInt != null){
             return Integer.parseInt(strInt);
-        }catch (Exception e){
-            e.printStackTrace();
         }
         return defaultValue;
     }

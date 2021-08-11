@@ -1,6 +1,7 @@
 package com.bberzhou.dao;
 
 import com.bberzhou.pojo.Book;
+import com.bberzhou.pojo.Page;
 
 import java.util.List;
 
@@ -46,5 +47,35 @@ public interface BookDao {
      */
     public List<Book> queryBooks();
 
+    /**
+     *  用于分页操作中，查询数据库中总的记录数
+     * @return 返回总的记录数
+     */
+    public int queryForPageTotalCount();
 
+    /**
+     *  用于分页查询，
+     * @param begin  分页查询的起始索引值
+     * @param pageSize  分页查询中的每页大小
+     * @return  返回一个book的 list集合
+     */
+    public  List<Book> queryForItems(int begin, Integer pageSize);
+
+    /**
+     *   查找价格区间内的所有数据 总数
+     * @param min   价格最小值
+     * @param max   价格最大值
+     * @return
+     */
+    public int queryForPageSearchTotalCount(Integer min,Integer max);
+
+    /**
+     *  价格搜索时，按照每页的数量和起始值搜索
+     * @param begin 起始索引位置
+     * @param pageSize  每页数据大小
+     * @param min 价格最小值
+     * @param max   价格最大值
+     * @return
+     */
+    public List<Book> queryForSearchItems(int begin, int pageSize, int min, int max);
 }
