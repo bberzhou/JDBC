@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
+
 
 /**
  * @description:
@@ -60,7 +62,7 @@ public class UserServlet2 extends BaseServlet {
     }
 
     /**
-     * 此方法做注册时调用，
+     * 此方法做注册时调用，并且增加Google验证码
      *
      * @param req
      * @param resp
@@ -105,9 +107,14 @@ public class UserServlet2 extends BaseServlet {
         //  版本4 改进之处，在3的基础上，利用泛型来减少类型转换，WebUtils的copyParamToBean()方法利用泛型自动转换类型
         User user = WebUtils.copyParamToBean(req.getParameterMap(), new User());
 
+        //  获取服务器生成的验证码参数，这个是通过第一次请求的时候就生成并保存到Session中了，所以通过req的Session来获取
+        String verificationCode = (String) req.getSession().getAttribute(KAPTCHA_SESSION_KEY);
+        System.out.println(verificationCode);
+        //  使用一次之后就要销毁掉，防止表单的重复提交
+        req.removeAttribute(KAPTCHA_SESSION_KEY);
 
-        //  2、检查验证码是否正确  ====》暂时没有讲如何生成验证码，所以这里先暂时写死 为abcde
-        if ("abcde".equalsIgnoreCase(code)) {
+        //  2、检查验证码是否正确  ====》采用谷歌的验证码。
+        if (verificationCode != null && verificationCode.equalsIgnoreCase(code)) {
             //  3、检查用户名是否可用
             if (userService.existUsername(username)) {
                 //  userService.existUsername(username) 返回true 表示已经存在不可用
@@ -122,6 +129,8 @@ public class UserServlet2 extends BaseServlet {
                 //  用户名可用，调用Service保存到数据库
                 userService.registerUser(new User(null, username, password, email));
                 //  插入数据之后，跳转到注册成功页面 regist.jsp
+                //  同时把注册成功的用户信息保存到Session中
+                req.getSession().setAttribute("user",user);
                 System.out.println("账号：" + username + "，" + "密码：" + password + " 注册成功！");
                 req.getRequestDispatcher("/pages/user/regist_success.jsp").forward(req, resp);
             }
@@ -134,7 +143,8 @@ public class UserServlet2 extends BaseServlet {
             req.setAttribute("email", email);
             System.out.println("验证码[" + code + "]错误");
             //  如果验证码不正确，则跳转到注册页面，这里采用请求转发的方式跳转到注册页面:regist.jsp
-            req.getRequestDispatcher("/pages/user/regist.jsp").forward(req, resp);
+            // req.getRequestDispatcher("/pages/user/regist.jsp").forward(req, resp);
+            resp.sendRedirect(req.getContextPath()+"/pages/user/regist.jsp");
 
         }
     }

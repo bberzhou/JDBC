@@ -9,6 +9,16 @@
     <%@ include file="/pages/common/header.jsp" %>
     <%--<link type="text/css" rel="stylesheet" href="static/css/style.css" >--%>
     <%--    用静态包含的方式加载 common里面的页面  css样式， jQuery文件--%>
+    <script>
+        //  页面加载完成之后，点击购物车，绑定单击事件
+        $(function () {
+            $(".addToCart").click(function () {
+                //  单击之后，通过 this 对象，获取bookId 的 value值
+                let bookId = $(this).attr("bookId");
+                location.href = "http://localhost:8080/book/cartServlet?action=addItem&id=" + bookId;
+            })
+        })
+    </script>
 </head>
 <body>
 
@@ -46,10 +56,23 @@
             </form>
         </div>
         <div style="text-align: center">
-            <span>您的购物车中有3件商品</span>
-            <div>
-                您刚刚将<span style="color: red">时间简史</span>加入到了购物车中
-            </div>
+            <%-- 或者通过判断 totalCount 也是可以的--%>
+            <c:if test="${empty sessionScope.cart.items}">
+                <%-- 购物车为空的输出--%>
+                <div>
+                        <%--    通过CartSelvet 中的addItem() 方法中 给session设置的lastName 来获取最后加入购物车的姓名--%>
+                    您刚刚将<span style="color: red">当前购物车为空</span>加入到了购物车中
+                </div>
+            </c:if>
+            <c:if test="${not empty sessionScope.cart.items}">
+                <%-- 购物车非为空的输出--%>
+                <%--    总的商品数量也是 通过session 域中的cart 获取--%>
+                <span>您的购物车中有${sessionScope.cart.totalCount}件商品</span>
+                <div>
+                        <%--    通过CartSelvet 中的addItem() 方法中 给session设置的lastName 来获取最后加入购物车的姓名--%>
+                    您刚刚将<span style="color: red">${sessionScope.lastName}</span>加入到了购物车中
+                </div>
+            </c:if>
         </div>
         <%--遍历输出 request域中的page里面的items属性--%>
         <c:forEach items="${requestScope.page.items}" var="book">
@@ -80,7 +103,8 @@
                         <span class="sp2">${book.stock}</span>
                     </div>
                     <div class="book_add">
-                        <button>加入购物车</button>
+                            <%-- 添加的时候带上图书的 id --%>
+                        <button class="addToCart" bookId="${book.id}">加入购物车</button>
                     </div>
                 </div>
             </div>

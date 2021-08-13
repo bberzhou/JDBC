@@ -57,5 +57,53 @@
         <servlet-name>ClientBookServlet</servlet-name>
         <url-pattern>/client/bookServlet</url-pattern>
     </servlet-mapping>
+    <!-- 处理验证码的Servlet-->
+    <servlet>
+        <servlet-name>KaptchaServlet</servlet-name>
+        <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>KaptchaServlet</servlet-name>
+        <url-pattern>/KaptchaServlet.jpg</url-pattern>
+    </servlet-mapping>
 
+    <!-- 处理购物车的 Servlet-->
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>com.bberzhou.servlet.CartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/cartServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- 处理创建订单的Servlet-->
+    <servlet>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>com.bberzhou.servlet.OrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/orderServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- 配置拦截器 对 pages/manager 页面进行拦截-->
+    <filter>
+        <filter-name>ManagerFilter</filter-name>
+        <filter-class>com.bberzhou.filter.ManagerFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ManagerFilter</filter-name>
+
+        <!--
+            注意,如果只是设置这个,那么如果直接在地址栏访问:
+            http://localhost:8080/book/manager/bookServlet?pageNo=1&action=page
+            还是有问题,所以需要配置多个 拦截路径
+        -->
+        <url-pattern>/pages/manager/*</url-pattern>
+
+        <!-- 对 Servlet 也进行拦截-->
+        <url-pattern>/manager/bookServlet</url-pattern>
+
+    </filter-mapping>
 </web-app>

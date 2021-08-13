@@ -28,7 +28,6 @@ public class RegisterServlet extends HttpServlet {
         String password = req.getParameter("password");
         String email = req.getParameter("email");
         String code = req.getParameter("code");
-
         //  2、检查验证码是否正确  ====》暂时没有讲如何生成验证码，所以这里先暂时写死 为abcde
         if ("abcde".equalsIgnoreCase(code)){
             //  3、检查用户名是否可用

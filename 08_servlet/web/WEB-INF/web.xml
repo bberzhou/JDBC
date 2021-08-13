@@ -90,4 +90,63 @@
         <servlet-name>KaptchaServlet</servlet-name>
         <url-pattern>/Kaptcha.jpg</url-pattern>
     </servlet-mapping>
+
+    <!-- filter标签用于配置一个Filter过滤器-->
+    <filter>
+        <!--    给filter配置一个别名  -->
+        <filter-name>AdminFilter</filter-name>
+        <!--    filter类的 全类名   -->
+        <filter-class>com.bberzhou.filter.AdminFilter</filter-class>
+
+        <!--    配置 filter的初始化参数,这里可以有多组 -->
+        <init-param>
+            <param-name>username</param-name>
+            <param-value>root</param-value>
+        </init-param>
+        <init-param>
+            <param-name>password</param-name>
+            <param-value>123</param-value>
+        </init-param>
+    </filter>
+    <!-- filter-mapping 配置Filter过滤器的拦截路径 -->
+    <filter-mapping>
+        <!--  filter-name 表示当前的拦截路径给哪个filter 使用  -->
+        <filter-name>AdminFilter</filter-name>
+        <!--
+            url-pattern 配置拦截路径
+                / 表示请求地址为: http://ip:port/工程路径/  映射到IDEA中的web目录
+
+                    /admin/* 表示请求地址为: http://ip:port/工程路径/admin/*  即admin文件夹下的全部
+
+        -->
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>Filter1</filter-name>
+        <filter-class>com.bberzhou.filter.Filter1</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Filter1</filter-name>
+        <url-pattern>/tartgetWithF12.jsp</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>Filter2</filter-name>
+        <filter-class>com.bberzhou.filter.Filter2</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Filter2</filter-name>
+        <url-pattern>/tartgetWithF12.jsp</url-pattern>
+    </filter-mapping>
+
+
+    <servlet>
+        <servlet-name>FormServlet</servlet-name>
+        <servlet-class>com.bberzhou.filter.FormServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FormServlet</servlet-name>
+        <url-pattern>/formServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
